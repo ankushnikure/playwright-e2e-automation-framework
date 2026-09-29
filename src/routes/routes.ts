@@ -1,3 +1,4 @@
 export const ROUTES = {
-    LOGIN: "auth/login"
+    LOGIN: "auth/login",
+    REGISTER: "auth/register"
 }

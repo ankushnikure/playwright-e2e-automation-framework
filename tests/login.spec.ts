@@ -25,12 +25,12 @@ test.describe("Login Tests", () => {
         const { email, password } = loginData.invalidUser;
         await loginPage.login(email, password);
         await loginPage.expectLoginErrorMessage("Incorrect email or password.");
-    })
+    });
 
     test("Verify validation error when the email & password field is empty", async ({ }) => {
         const { email, password } = loginData.missingField;
         await loginPage.login(email, password);
         await loginPage.expectEmailRequiredError("*Email is required");
         await loginPage.expectPasswordrequiredError("*Password is required");
-    })
+    });
 });
