@@ -1,8 +1,4 @@
 {
-    "validUser": {
-        "email": "anshika@gmail.com",
-        "password": "Iamking@000"
-    },
     "invalidUser": {
         "email": "invalid@gmail.com",
         "password": "Iamking@000"
