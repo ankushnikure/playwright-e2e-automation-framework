@@ -1,5 +1,5 @@
-import { BasePage } from "./base.page";
-import { Locator, expect } from "@playwright/test";
+import { BasePage } from './base.page';
+import { Locator, expect } from '@playwright/test';
 
 export type RegistraionData = {
     firstName: string;
