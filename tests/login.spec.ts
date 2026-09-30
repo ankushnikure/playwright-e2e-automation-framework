@@ -17,7 +17,23 @@ test.describe('Login Tests', () => {
         if (!email || !password) {
             throw new Error('EMAIL or PASSWORD is missing from the selected environment');
         }
+
+        // Start listening for the login response before triggering the request
+        const responsePromise = page.waitForResponse(
+            response =>
+                response.url().includes('login') &&
+                response.request().method() === 'POST'
+        );
+
+        // Submit the credentials to trigger the login request
         await loginPage.login(email, password);
+
+        // Wait for the matching login response
+        const response = await responsePromise;
+
+        // Verify that the login API returned HTTP 200
+        expect(response.status()).toBe(200);
+
         await expect(page).toHaveURL(/dashboard/);
     });
 
