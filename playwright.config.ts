@@ -8,7 +8,7 @@ if (result.error) {
     throw new Error(`Could not load .env.${ENV}: ${result.error.message}`);
 }
 
-const BASE_URL = process.env.BASE_URL!
+const BASE_URL = process.env.BASE_URL!;
 if (!BASE_URL) {
     throw new Error(`BASE_URL is missing in .env.${ENV}`);
 }
@@ -28,6 +28,7 @@ export default defineConfig({
         screenshot: "only-on-failure",
         video: "retain-on-failure",
         headless: false,
+        navigationTimeout: 10000,
         viewport: null,
         launchOptions: {
             args: ['--start-maximized']
