@@ -11,7 +11,7 @@ test.describe('Reset password test', () => {
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         forgotPasswordPage = new ForgotPasswordPage(page);
-        await forgotPasswordPage.goto(ROUTES.FORGOT_PASSWORD)
+        await page.goto(ROUTES.FORGOT_PASSWORD)
     });
 
     test('Verify reset password', async ({ page }) => {

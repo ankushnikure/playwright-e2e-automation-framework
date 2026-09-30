@@ -8,7 +8,7 @@ test.describe('Login Tests', () => {
 
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
-        await loginPage.goto(ROUTES.LOGIN);
+        await page.goto(ROUTES.LOGIN);
     });
 
     test('Verify login with valid credentials', async ({ page }) => {

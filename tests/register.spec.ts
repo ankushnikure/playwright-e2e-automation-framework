@@ -9,7 +9,7 @@ test.describe('Resgiter Test', () => {
 
     test.beforeEach(async ({ page }) => {
         registerPage = new RegisterPage(page);
-        await registerPage.goto(ROUTES.REGISTER);
+        await page.goto(ROUTES.REGISTER);
     });
 
     test('Verify user registraion', async ({ }) => {
