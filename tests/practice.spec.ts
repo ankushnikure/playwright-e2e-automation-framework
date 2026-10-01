@@ -10,7 +10,7 @@ test.describe('Practice Tests', () => {
         await page.goto(ROUTES.AUTOMATION_PRACTICE);
     });
 
-    test.only('Handle alerts', async ({ page }) => {
+    test('Handle alerts', async ({ page }) => {
         // Start listening for the dialog
         page.once('dialog', async dialog => {
 
@@ -24,5 +24,12 @@ test.describe('Practice Tests', () => {
 
         // Trigger the alert
         practicePage.clickAlert();
+        await page.pause();
+    });
+
+    test('Handle iframe', async({page}) => {
+        const userEmail = await practicePage.getEmailText();
+        expect(userEmail).not.toBeNull();
+        console.log(`Emmail: ${userEmail}`);
     });
 });
