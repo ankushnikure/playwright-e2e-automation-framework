@@ -1,5 +1,5 @@
 export const ROUTES = {
-    LOGIN: "auth/login",
-    REGISTER: "auth/register",
-    FORGOT_PASSWORD: "auth/password-new"
+    LOGIN: "client/#/auth/login",
+    REGISTER: "client/#/auth/register",
+    FORGOT_PASSWORD: "client/#/auth/password-new"
 }
