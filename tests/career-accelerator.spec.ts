@@ -48,4 +48,19 @@ test.describe('Handle Popups / New Tabs', () => {
         // Validate the new page
         await expect(newPage).toHaveURL(/qa-career-accelerator-job-ready/);
     });
+
+    test('Verify handling multiple tabs', async ({ page }) => {
+        const careerPagePromise = page.waitForEvent('popup');
+        await dashboardPage.clickOnCareerJobLink();
+        const careerJobPage = await careerPagePromise;
+        await careerJobPage.waitForLoadState('domcontentloaded');
+        await expect(careerJobPage).toHaveURL(/qa-career-accelerator-job-ready/);
+
+        // Listen for the Signup popup from the Career page
+        const signupPagePromise = careerJobPage.waitForEvent('popup');
+        await careerJobPage.getByText('Sign Up', { exact: true }).click();
+        const signupPage = await signupPagePromise;
+        await signupPage.waitForLoadState('domcontentloaded');
+        await expect(signupPage).toHaveURL(/sign_up/);
+    });
 });
