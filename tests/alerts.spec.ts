@@ -20,8 +20,6 @@ test.describe('Practice Tests', () => {
 
             // Accept the dialog
             await dialog.accept();
-
-
         });
 
         // Trigger the alert
