@@ -37,9 +37,18 @@ test.describe('Login Tests', () => {
         await expect(page).toHaveURL(/dashboard/);
     });
 
-    test('Verify login with invalid credentials', async () => {
+    test('Verify login with invalid credentials', async ({ page }) => {
         const { email, password } = loginData.invalidUser;
+
+        const responsePromise = page.waitForResponse(
+            response => 
+                response.url().includes('api/ecom/auth/login') && 
+                response.request().method() === 'POST'
+        );
         await loginPage.login(email, password);
+        
+        const response = await responsePromise;
+        expect(response.status()).toBe(400);
         await loginPage.expectLoginErrorMessage('Incorrect email or password.');
     });
 
