@@ -36,16 +36,37 @@ export default defineConfig({
     },
 
     projects: [
+
         // Creates authentication state
         {
             name: 'setup',
             testMatch: /.*\.setup\.ts/
         },
-        // Runs application tests using saved authentication state
+
+        // Authentication UI tests
+        {
+            name: 'auth',
+            testMatch: /.*\/ui\/auth\/.*\.spec\.ts/,
+            use: {
+                browserName: 'chromium'
+            }
+        },
+
+        // Application UI tests
         {
             name: 'chromium',
-            // Run authentication setup before this project.
-            dependencies: ['setup']
+            testMatch: /.*\/ui\/.*\.spec\.ts/,
+            testIgnore: /.*\/ui\/auth\/.*\.spec\.ts/,
+            dependencies: ['setup'],
+            use: {
+                browserName: 'chromium'
+            }
+        },
+
+        // API tests
+        {
+            name: 'api',
+            testMatch: /.*\/api\/.*\.spec\.ts/
         }
     ]
 });
