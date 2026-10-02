@@ -49,7 +49,7 @@ test.describe('Handle Popups / New Tabs', () => {
         await expect(newPage).toHaveURL(/qa-career-accelerator-job-ready/);
     });
 
-    test.only('Verify handling multiple tabs', async ({ page }) => {
+    test('Verify handling multiple tabs', async ({ page }) => {
         const careerPagePromise = page.waitForEvent('popup');
         await dashboardPage.clickOnCareerJobLink();
         const careerJobPage = await careerPagePromise;
