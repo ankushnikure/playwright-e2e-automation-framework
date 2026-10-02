@@ -1,6 +1,6 @@
-import { PracticePage } from '@pages/practice.page';
 import { expect, test } from '@playwright/test';
-import { ROUTES } from 'src/routes/routes';
+import { ROUTES } from '@routes/routes';
+import { PracticePage } from '@pages/practice.page';
 
 test.describe('Practice Tests', () => {
     let practicePage: PracticePage;
@@ -24,10 +24,9 @@ test.describe('Practice Tests', () => {
 
         // Trigger the alert
         practicePage.clickAlert();
-        await page.pause();
     });
 
-    test('Handle iframe', async({page}) => {
+    test('Handle iframe', async ({ }) => {
         const userEmail = await practicePage.getEmailText();
         expect(userEmail).not.toBeNull();
         console.log(`Emmail: ${userEmail}`);

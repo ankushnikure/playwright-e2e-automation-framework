@@ -1,7 +1,7 @@
-import { defineConfig } from "@playwright/test";
-import dotenv from "dotenv";
+import { defineConfig } from '@playwright/test';
+import dotenv from 'dotenv';
 
-const ENV = process.env.ENV || "staging";
+const ENV = process.env.ENV || 'staging';
 
 const result = dotenv.config({ path: `.env.${ENV}` });
 if (result.error) {
@@ -14,19 +14,19 @@ if (!BASE_URL) {
 }
 
 export default defineConfig({
-    testDir: "./tests",
+    testDir: './tests',
     timeout: 30000,
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 1 : undefined,
-    reporter: "html",
+    reporter: 'html',
 
     use: {
         baseURL: BASE_URL,
-        trace: "on-first-retry",
-        screenshot: "only-on-failure",
-        video: "retain-on-failure",
+        trace: 'on-first-retry',
+        screenshot: 'only-on-failure',
+        video: 'retain-on-failure',
         headless: false,
         navigationTimeout: 10000,
         viewport: null,
@@ -35,5 +35,21 @@ export default defineConfig({
         }
     },
 
-    projects: [{ name: "chromium" }]
+    projects: [
+        // Runs authentication setup
+        {
+            name: 'setup',
+            testMatch: /.*\.setup\.ts/
+        },
+        // Runs actual tests using saved authentication state
+        {
+            name: 'chromium',
+            use: {
+                // Initialize this project's test browser contexts using this saved authentication state.
+                storageState: 'playwright/.auth/user.json'
+            },
+            // Run authentication setup before this project.
+            dependencies: ['setup']
+        }
+    ]
 });

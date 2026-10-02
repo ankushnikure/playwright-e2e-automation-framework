@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { ForgotPasswordPage } from '@pages/forgot-password.page';
-import { ROUTES } from 'src/routes/routes';
+import { ROUTES } from '@routes/routes';
 import { LoginPage } from '@pages/login.page';
 import forgotPasswordData from '@test-data/forgot-password.data.json';
 

@@ -1,7 +1,7 @@
 import { DashboardPage } from '@pages/dashboard.page';
 import { LoginPage } from '@pages/login.page';
 import { test, expect } from '@playwright/test';
-import { ROUTES } from 'src/routes/routes';
+import { ROUTES } from '@routes/routes';
 
 test.describe('Handle Popups / New Tabs', () => {
     let loginPage: LoginPage;

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '@pages/login.page';
-import { ROUTES } from 'src/routes/routes';
+import { ROUTES } from '@routes/routes';
 import loginData from '@test-data/login.data.json';
 
 test.describe('Login Tests', () => {

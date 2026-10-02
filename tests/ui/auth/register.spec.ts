@@ -1,6 +1,6 @@
 import { RegisterPage } from '@pages/register.page';
 import { test } from '@playwright/test';
-import { ROUTES } from 'src/routes/routes';
+import { ROUTES } from '@routes/routes';
 import registraionData from '@test-data/registraion.data.json';
 import type { RegistraionData } from '@pages/register.page';
 

@@ -4,18 +4,17 @@
     "module": "commonjs",
     "strict": true,
     "types": ["node", "@playwright/test"],
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "paths": {
-            "@config/*": ["src/config/*"],
-            "@fixtures/*": ["src/fixtures/*"],
-            "@pages/*": ["src/pages/*"],
-            "@test-data/*": ["src/test-data/*"],
-            "@types/*": ["src/types/*"]
+            "@fixtures/*": ["./src/fixtures/*"],
+            "@pages/*": ["./src/pages/*"],
+            "@test-data/*": ["./src/test-data/*"],
+            "@routes/*": ["./src/routes/*"]
         },
   },
   "include": [
     "src/**/*.ts",
     "tests/**/*.ts",
     "playwright.config.ts"
-, "tests/login.spec.ts"  ]
+  ]
 }
