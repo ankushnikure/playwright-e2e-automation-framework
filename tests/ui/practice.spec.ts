@@ -15,7 +15,7 @@ test.describe('Practice Tests', () => {
         page.once('dialog', async dialog => {
 
             // Validate the dialog message
-            console.log(dialog.message());
+            console.log('Alert mesaage:', dialog.message());
             expect(dialog.message()).toBe('Hello , share this practice page and share your knowledge');
 
             // Accept the dialog
