@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 import dotenv from 'dotenv';
 
-const ENV = process.env.ENV || 'staging';
+const ENV = process.env.ENV || 'qa';
 
 const result = dotenv.config({ path: `.env.${ENV}` });
 if (result.error) {
