@@ -36,18 +36,14 @@ export default defineConfig({
     },
 
     projects: [
-        // Runs authentication setup
+        // Creates authentication state
         {
             name: 'setup',
             testMatch: /.*\.setup\.ts/
         },
-        // Runs actual tests using saved authentication state
+        // Runs application tests using saved authentication state
         {
             name: 'chromium',
-            use: {
-                // Initialize this project's test browser contexts using this saved authentication state.
-                storageState: 'playwright/.auth/user.json'
-            },
             // Run authentication setup before this project.
             dependencies: ['setup']
         }
