@@ -8,7 +8,7 @@ if (result.error) {
     throw new Error(`Could not load .env.${ENV}: ${result.error.message}`);
 }
 
-const BASE_URL = process.env.BASE_URL!;
+const BASE_URL = process.env.BASE_URL;
 if (!BASE_URL) {
     throw new Error(`BASE_URL is missing in .env.${ENV}`);
 }
