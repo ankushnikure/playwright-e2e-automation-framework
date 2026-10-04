@@ -1,5 +1,4 @@
 import { test as setup, expect } from '@playwright/test';
-import { LoginPage } from '@pages/login.page';
 import { ROUTES } from '@routes/routes';
 
 setup('authenticate user', async ({ page, request }) => {
