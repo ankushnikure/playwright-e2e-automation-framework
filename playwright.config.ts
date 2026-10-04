@@ -1,17 +1,7 @@
 import { defineConfig } from '@playwright/test';
-import dotenv from 'dotenv';
+import { env } from '@utils/env';
 
-const ENV = process.env.ENV || 'qa';
 
-const result = dotenv.config({ path: `.env.${ENV}` });
-if (result.error) {
-    throw new Error(`Could not load .env.${ENV}: ${result.error.message}`);
-}
-
-const BASE_URL = process.env.BASE_URL;
-if (!BASE_URL) {
-    throw new Error(`BASE_URL is missing in .env.${ENV}`);
-}
 
 export default defineConfig({
     testDir: './tests',
@@ -23,7 +13,7 @@ export default defineConfig({
     reporter: 'html',
 
     use: {
-        baseURL: BASE_URL,
+        baseURL: env.baseUrl,
         trace: 'on-first-retry',
         screenshot: 'only-on-failure',
         video: 'retain-on-failure',

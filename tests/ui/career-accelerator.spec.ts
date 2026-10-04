@@ -2,6 +2,7 @@ import { DashboardPage } from '@pages/dashboard.page';
 import { LoginPage } from '@pages/login.page';
 import { test, expect } from '@playwright/test';
 import { ROUTES } from '@routes/routes';
+import { env } from '@utils/env'
 
 test.describe('Handle Popups / New Tabs', () => {
     let loginPage: LoginPage;
@@ -12,12 +13,6 @@ test.describe('Handle Popups / New Tabs', () => {
         dashboardPage = new DashboardPage(page);
 
         await page.goto(ROUTES.LOGIN);
-        const email = process.env.EMAIL;
-        const password = process.env.PASSWORD;
-
-        if (!email || !password) {
-            throw new Error(`EMAIL or PASSWORD missing in selected environment`);
-        }
 
         const responsePromise = page.waitForResponse(
             response =>
@@ -25,7 +20,7 @@ test.describe('Handle Popups / New Tabs', () => {
                 response.request().method() === 'POST'
         );
 
-        await loginPage.login(email, password);
+        await loginPage.login(env.email, env.password);
 
         const response = await responsePromise;
         expect(response.status()).toBe(200);

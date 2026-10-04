@@ -1,14 +1,12 @@
 import {test, expect} from '@playwright/test';
+import { env } from '@utils/env';
 
 test('Verify login API reponse', async ({ request }) => {
 
-    const email = process.env.EMAIL;
-    const password = process.env.PASSWORD;
-
     const respose = await request.post('api/ecom/auth/login', {
         data: {
-            userEmail: email,
-            userPassword: password
+            userEmail: env.email,
+            userPassword: env.password
         }
     });
     

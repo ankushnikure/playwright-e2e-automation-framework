@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '@pages/login.page';
 import { ROUTES } from '@routes/routes';
+import { env } from '@utils/env'
 import loginData from '@test-data/login.data.json';
 
 test.describe('Login Tests', () => {
@@ -12,12 +13,6 @@ test.describe('Login Tests', () => {
     });
 
     test('Verify login with valid credentials', async ({ page }) => {
-        const email = process.env.EMAIL;
-        const password = process.env.PASSWORD;
-        if (!email || !password) {
-            throw new Error('EMAIL or PASSWORD is missing from the selected environment');
-        }
-
         // Listen for the login response before triggering the request
         const responsePromise = page.waitForResponse(
             response =>
@@ -26,14 +21,13 @@ test.describe('Login Tests', () => {
         );
 
         // Trigger the login request
-        await loginPage.login(email, password);
+        await loginPage.login(env.email, env.password);
 
         // Wait for the response and validate its status
         const response = await responsePromise;
 
         // Verify that the login API returned HTTP 200
         expect(response.status()).toBe(200);
-
         await expect(page).toHaveURL(/dashboard/);
     });
 
@@ -41,13 +35,14 @@ test.describe('Login Tests', () => {
         const { email, password } = loginData.invalidUser;
 
         const responsePromise = page.waitForResponse(
-            response => 
-                response.url().includes('api/ecom/auth/login') && 
+            response =>
+                response.url().includes('api/ecom/auth/login') &&
                 response.request().method() === 'POST'
         );
         await loginPage.login(email, password);
-        
+
         const response = await responsePromise;
+
         expect(response.status()).toBe(400);
         await loginPage.expectLoginErrorMessage('Incorrect email or password.');
     });
