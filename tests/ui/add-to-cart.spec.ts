@@ -2,7 +2,7 @@ import { test, expect } from '@fixtures/auth.fixture';
 import { ROUTES } from '@routes/routes';
 
 test.describe('Add to Cart Tests', () => {
-    test('Add product to cart', async ({ page, dashboardPage }) => {
+    test('Add product to cart', { tag: '@smoke' }, async ({ page, dashboardPage }) => {
         const responsePromise = page.waitForResponse(
             response =>
                 response.url().includes('api/ecom/user/add-to-cart') &&

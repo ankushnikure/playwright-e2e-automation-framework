@@ -8,7 +8,7 @@ test.describe('Registration Tests', () => {
         await page.goto(ROUTES.REGISTER);
     });
 
-    test('Show error when user already exists', async ({ registrationPage }) => {
+    test('Show error when registering an existing user', { tag: ['@auth', '@smoke'] }, async ({ registrationPage }) => {
         await registrationPage.registerUser(registrationData as RegistrationData);
         await registrationPage.expectRegistrationError(' User already exisits with this Email Id! ');
     });

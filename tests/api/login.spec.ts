@@ -1,8 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { env } from '@utils/env';
 
-test('Login API with valid credentials', async ({ request }) => {
-
+test('Login API with valid credentials', { tag: ['@auth', '@smoke'] }, async ({ request }) => {
     const response = await request.post('api/ecom/auth/login', {
         data: {
             userEmail: env.email,

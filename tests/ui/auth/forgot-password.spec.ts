@@ -7,7 +7,7 @@ test.describe('Reset Password Tests', () => {
         await page.goto(ROUTES.FORGOT_PASSWORD);
     });
 
-    test('Reset password successfully', async ({ page, loginPage, forgotPasswordPage }) => {
+    test('Reset password successfully', { tag: '@auth' }, async ({ page, loginPage, forgotPasswordPage }) => {
         await forgotPasswordPage.fillResetPasswordForm(forgotPasswordData);
         await forgotPasswordPage.saveNewPassword();
         await expect(page).toHaveURL(/login/);

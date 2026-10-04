@@ -8,7 +8,7 @@ test.describe('Login Tests', () => {
         await page.goto(ROUTES.LOGIN);
     });
 
-    test('Login with valid credentials', async ({ page, loginPage }) => {
+    test('Login with valid credentials', { tag: ['@auth', '@smoke'] }, async ({ page, loginPage }) => {
         // Listen for the login response before triggering the request
         const responsePromise = page.waitForResponse(
             response =>
@@ -27,7 +27,7 @@ test.describe('Login Tests', () => {
         await expect(page).toHaveURL(/dashboard/);
     });
 
-    test('Login with invalid credentials', async ({ page, loginPage }) => {
+    test('Login with invalid credentials', { tag: '@auth' }, async ({ page, loginPage }) => {
         const { email, password } = loginData.invalidUser;
 
         const responsePromise = page.waitForResponse(
@@ -44,7 +44,7 @@ test.describe('Login Tests', () => {
         await loginPage.expectLoginErrorMessage('Incorrect email or password.');
     });
 
-    test('Show validation errors for empty credentials', async ({ loginPage }) => {
+    test('Show validation errors for empty credentials', { tag: '@auth' }, async ({ loginPage }) => {
         const { email, password } = loginData.missingField;
 
         await loginPage.login(email, password);
