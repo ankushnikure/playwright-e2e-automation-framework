@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test",
+    "test:auth": "npx playwright test --grep @auth",
+    "test:smoke": "npx playwright test --grep @smoke",
+    "test:regression": "npx playwright test"
   },
   "keywords": [],
   "author": "",
