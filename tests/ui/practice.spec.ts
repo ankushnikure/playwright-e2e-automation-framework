@@ -13,9 +13,7 @@ test.describe('Practice Tests', () => {
     test('Handle alerts', async ({ page }) => {
         // Start listening for the dialog
         page.once('dialog', async dialog => {
-
             // Validate the dialog message
-            console.log('Alert mesaage:', dialog.message());
             expect(dialog.message()).toBe('Hello , share this practice page and share your knowledge');
 
             // Accept the dialog
@@ -23,12 +21,12 @@ test.describe('Practice Tests', () => {
         });
 
         // Trigger the alert
-        practicePage.clickAlert();
+        await practicePage.clickAlert();
     });
 
-    test('Handle iframe', async ({ }) => {
+    test('Handle iframe', async () => {
         const userEmail = await practicePage.getEmailText();
+
         expect(userEmail).not.toBeNull();
-        console.log(`Emmail: ${userEmail}`);
     });
 });

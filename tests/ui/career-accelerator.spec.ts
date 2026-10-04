@@ -2,9 +2,9 @@ import { DashboardPage } from '@pages/dashboard.page';
 import { LoginPage } from '@pages/login.page';
 import { test, expect } from '@playwright/test';
 import { ROUTES } from '@routes/routes';
-import { env } from '@utils/env'
+import { env } from '@utils/env';
 
-test.describe('Handle Popups / New Tabs', () => {
+test.describe('Popups and New Tabs Tests', () => {
     let loginPage: LoginPage;
     let dashboardPage: DashboardPage;
 
@@ -24,10 +24,11 @@ test.describe('Handle Popups / New Tabs', () => {
 
         const response = await responsePromise;
         expect(response.status()).toBe(200);
+
         await expect(page).toHaveURL(/dashboard/);
     });
 
-    test('Verify handling Popups / New Tabs', async ({ page }) => {
+    test('Handle new tab', async ({ page }) => {
         // Start listening for new page
         const newPagePromise = page.waitForEvent('popup');
 
@@ -44,25 +45,30 @@ test.describe('Handle Popups / New Tabs', () => {
         await expect(newPage).toHaveURL(/qa-career-accelerator-job-ready/);
     });
 
-    test('Verify handling multiple tabs', async ({ page }) => {
+    test('Handle multiple tabs', async ({ page }) => {
         const careerPagePromise = page.waitForEvent('popup');
+
         await dashboardPage.clickOnCareerJobLink();
+
         const careerJobPage = await careerPagePromise;
         await careerJobPage.waitForLoadState('domcontentloaded');
-        await expect(careerJobPage).toHaveURL(/qa-career-accelerator-job-ready/);
 
+        await expect(careerJobPage).toHaveURL(/qa-career-accelerator-job-ready/);
 
         // Listen for the Signup popup from the Career page
         const signupPagePromise = careerJobPage.waitForEvent('popup');
+
         await careerJobPage.getByText('Sign Up', { exact: true }).click();
+
         const signupPage = await signupPagePromise;
         await signupPage.waitForLoadState('domcontentloaded');
+
         await expect(signupPage).toHaveURL(/sign_up/);
 
-        // Switch the visual focus to a careerJobPage browser tab
+        // Switch the visual focus to the Career Job page
         await careerJobPage.bringToFront();
 
-        // Switch the visual focus to a signupPage browser tab
+        // Switch the visual focus to the Signup page
         await signupPage.bringToFront();
     });
 });

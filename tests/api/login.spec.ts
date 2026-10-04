@@ -1,16 +1,17 @@
-import {test, expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { env } from '@utils/env';
 
-test('Verify login API reponse', async ({ request }) => {
+test('Login API with valid credentials', async ({ request }) => {
 
-    const respose = await request.post('api/ecom/auth/login', {
+    const response = await request.post('api/ecom/auth/login', {
         data: {
             userEmail: env.email,
             userPassword: env.password
         }
     });
-    
-    expect(respose.ok()).toBeTruthy();
-    const responseBody = await respose.json();
+
+    expect(response.ok()).toBeTruthy();
+
+    const responseBody = await response.json();
     console.log(responseBody);
 });

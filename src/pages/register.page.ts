@@ -1,7 +1,7 @@
 import { BasePage } from './base.page';
 import { Locator, expect } from '@playwright/test';
 
-export type RegistraionData = {
+export type RegistrationData = {
     firstName: string;
     lastName: string;
     email: string;

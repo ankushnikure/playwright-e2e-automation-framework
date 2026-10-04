@@ -2,8 +2,7 @@ import { test as setup, expect } from '@playwright/test';
 import { env } from '@utils/env';
 import { ROUTES } from '@routes/routes';
 
-setup('authenticate user', async ({ page, request }) => {
-
+setup('Authenticate user', async ({ page, request }) => {
     const response = await request.post('api/ecom/auth/login', {
         data: {
             userEmail: env.email,

@@ -1,8 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { ROUTES } from '@routes/routes';
 
-test('Verify authenticated and guest users have independent sessions', async ({ browser }) => {
-
+test('Maintain independent sessions for authenticated and guest users', async ({ browser }) => {
     // Create authenticated user session using saved storage state
     const userContext = await browser.newContext({
         storageState: 'playwright/.auth/user.json'
@@ -14,7 +13,7 @@ test('Verify authenticated and guest users have independent sessions', async ({ 
     const userPage = await userContext.newPage();
     const guestPage = await guestContext.newPage();
 
-    // Open dashboard in both sessionsg
+    // Open pages in both sessionsns
     await userPage.goto(ROUTES.DASHBOARD);
     await guestPage.goto(ROUTES.LOGIN);
 

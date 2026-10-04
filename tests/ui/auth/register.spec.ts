@@ -1,10 +1,10 @@
 import { RegisterPage } from '@pages/register.page';
 import { test } from '@playwright/test';
 import { ROUTES } from '@routes/routes';
-import registraionData from '@test-data/registraion.data.json';
-import type { RegistraionData } from '@pages/register.page';
+import registrationData from '@test-data/registration.data.json';
+import type { RegistrationData } from '@pages/register.page';
 
-test.describe('Resgiter Test', () => {
+test.describe('Registration Tests', () => {
     let registerPage: RegisterPage;
 
     test.beforeEach(async ({ page }) => {
@@ -12,8 +12,8 @@ test.describe('Resgiter Test', () => {
         await page.goto(ROUTES.REGISTER);
     });
 
-    test('Verify user registraion', async ({ }) => {
-        await registerPage.registerUser(registraionData as RegistraionData);
+    test('Show error when user already exists', async () => {
+        await registerPage.registerUser(registrationData as RegistrationData);
         await registerPage.expectRegistrationError(' User already exisits with this Email Id! ');
     });
 
