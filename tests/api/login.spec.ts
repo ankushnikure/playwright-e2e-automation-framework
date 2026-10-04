@@ -13,5 +13,8 @@ test('Login API with valid credentials', async ({ request }) => {
     expect(response.ok()).toBeTruthy();
 
     const responseBody = await response.json();
-    console.log(responseBody);
+
+    expect(responseBody.token).toBeTruthy();
+    expect(responseBody.userId).toBeTruthy();
+    expect(responseBody.message).toBe('Login Successfully');
 });
