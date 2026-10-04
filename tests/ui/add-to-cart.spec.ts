@@ -14,8 +14,7 @@ test.describe('Add to Cart Tests', () => {
 
         const response = await responsePromise;
 
-        console.log('Status:', response.status());
-        console.log('Response:', await response.json());
+        expect(response.status()).toBe(200);
     });
 
     test('Add product to cart with mocked API response', async ({ page, dashboardPage }) => {
