@@ -1,16 +1,12 @@
-import { expect, test } from '@playwright/test';
+import { test, expect } from '@fixtures/page.fixture';
 import { ROUTES } from '@routes/routes';
-import { PracticePage } from '@pages/practice.page';
 
 test.describe('Practice Tests', () => {
-    let practicePage: PracticePage;
-
-    test.beforeEach(async ({ page }) => {
-        practicePage = new PracticePage(page);
+    test.beforeEach(async ({ page, practicePage }) => {
         await page.goto(ROUTES.AUTOMATION_PRACTICE);
     });
 
-    test('Handle alerts', async ({ page }) => {
+    test('Handle alerts', async ({ page, practicePage }) => {
         // Start listening for the dialog
         page.once('dialog', async dialog => {
             // Validate the dialog message
@@ -24,7 +20,7 @@ test.describe('Practice Tests', () => {
         await practicePage.clickAlert();
     });
 
-    test('Handle iframe', async () => {
+    test('Handle iframe', async ({ practicePage }) => {
         const userEmail = await practicePage.getEmailText();
 
         expect(userEmail).not.toBeNull();

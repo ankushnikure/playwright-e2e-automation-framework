@@ -1,18 +1,14 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '@pages/login.page';
+import { test, expect } from '@fixtures/page.fixture';
 import { ROUTES } from '@routes/routes';
 import { env } from '@utils/env';
 import loginData from '@test-data/login.data.json';
 
 test.describe('Login Tests', () => {
-    let loginPage: LoginPage;
-
     test.beforeEach(async ({ page }) => {
-        loginPage = new LoginPage(page);
         await page.goto(ROUTES.LOGIN);
     });
 
-    test('Login with valid credentials', async ({ page }) => {
+    test('Login with valid credentials', async ({ page, loginPage }) => {
         // Listen for the login response before triggering the request
         const responsePromise = page.waitForResponse(
             response =>
@@ -31,7 +27,7 @@ test.describe('Login Tests', () => {
         await expect(page).toHaveURL(/dashboard/);
     });
 
-    test('Login with invalid credentials', async ({ page }) => {
+    test('Login with invalid credentials', async ({ page, loginPage }) => {
         const { email, password } = loginData.invalidUser;
 
         const responsePromise = page.waitForResponse(
@@ -48,11 +44,11 @@ test.describe('Login Tests', () => {
         await loginPage.expectLoginErrorMessage('Incorrect email or password.');
     });
 
-    test('Show validation errors for empty credentials', async () => {
+    test('Show validation errors for empty credentials', async ({ loginPage }) => {
         const { email, password } = loginData.missingField;
 
         await loginPage.login(email, password);
-        
+
         await loginPage.expectEmailRequiredError('*Email is required');
         await loginPage.expectPasswordRequiredError('*Password is required');
     });

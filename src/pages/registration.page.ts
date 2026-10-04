@@ -11,7 +11,7 @@ export type RegistrationData = {
     password: string;
 }
 
-export class RegisterPage extends BasePage {
+export class RegistrationPage extends BasePage {
 
     // Locators
     private readonly firstNameInput: Locator = this.page.getByPlaceholder('First Name');

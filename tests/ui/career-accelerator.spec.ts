@@ -1,34 +1,12 @@
-import { DashboardPage } from '@pages/dashboard.page';
-import { LoginPage } from '@pages/login.page';
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@fixtures/auth.fixture';
 import { ROUTES } from '@routes/routes';
-import { env } from '@utils/env';
 
 test.describe('Popups and New Tabs Tests', () => {
-    let loginPage: LoginPage;
-    let dashboardPage: DashboardPage;
-
     test.beforeEach(async ({ page }) => {
-        loginPage = new LoginPage(page);
-        dashboardPage = new DashboardPage(page);
-
         await page.goto(ROUTES.LOGIN);
-
-        const responsePromise = page.waitForResponse(
-            response =>
-                response.url().includes('api/ecom/auth/login') &&
-                response.request().method() === 'POST'
-        );
-
-        await loginPage.login(env.email, env.password);
-
-        const response = await responsePromise;
-        expect(response.status()).toBe(200);
-
-        await expect(page).toHaveURL(/dashboard/);
     });
 
-    test('Handle new tab', async ({ page }) => {
+    test('Handle new tab', async ({ page, dashboardPage }) => {
         // Start listening for new page
         const newPagePromise = page.waitForEvent('popup');
 
@@ -45,7 +23,7 @@ test.describe('Popups and New Tabs Tests', () => {
         await expect(newPage).toHaveURL(/qa-career-accelerator-job-ready/);
     });
 
-    test('Handle multiple tabs', async ({ page }) => {
+    test('Handle multiple tabs', async ({ page, dashboardPage }) => {
         const careerPagePromise = page.waitForEvent('popup');
 
         await dashboardPage.clickOnCareerJobLink();
