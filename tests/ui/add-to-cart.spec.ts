@@ -1,5 +1,6 @@
 import { test, expect } from '@fixtures/auth.fixture';
 import { ROUTES } from '@routes/routes';
+import products from '@test-data/products.json'
 
 test.describe('Add to Cart Tests', () => {
     test('Add product to cart', { tag: '@smoke' }, async ({ page, dashboardPage }) => {
@@ -10,7 +11,7 @@ test.describe('Add to Cart Tests', () => {
         );
 
         await page.goto(ROUTES.DASHBOARD);
-        await dashboardPage.addProductToCart('ZARA COAT 3');
+        await dashboardPage.addProductToCart(products.zaraCoat);
 
         const response = await responsePromise;
 
@@ -34,7 +35,7 @@ test.describe('Add to Cart Tests', () => {
         await page.goto(ROUTES.DASHBOARD);
 
         // Trigger Add to Cart API from UI
-        await dashboardPage.addProductToCart('ZARA COAT 3');
+        await dashboardPage.addProductToCart(products.zaraCoat);
 
         // Verify mocked API response on UI
         await expect(page.getByText('Mock Product Added To Cart')).toBeVisible();
@@ -57,7 +58,7 @@ test.describe('Add to Cart Tests', () => {
         await page.goto(ROUTES.DASHBOARD);
 
         // Trigger Add to Cart API from UI
-        await dashboardPage.addProductToCart('ZARA COAT 3');
+        await dashboardPage.addProductToCart(products.zaraCoat);
 
         // Verify error response on UI
         await expect(page.getByText('Internal Server Error')).toBeVisible();
@@ -74,7 +75,7 @@ test.describe('Add to Cart Tests', () => {
         await page.goto(ROUTES.DASHBOARD);
 
         // Trigger Add to Cart API from UI
-        await dashboardPage.addProductToCart('ZARA COAT 3');
+        await dashboardPage.addProductToCart(products.zaraCoat);
 
         // Verify network error on UI
         await expect(page.getByText('Unknown error occured')).toBeVisible();
@@ -96,7 +97,7 @@ test.describe('Add to Cart Tests', () => {
         await page.goto(ROUTES.DASHBOARD);
 
         // Trigger Add to Cart API from UI
-        await dashboardPage.addProductToCart('ZARA COAT 3');
+        await dashboardPage.addProductToCart(products.zaraCoat);
 
         await expect(page.getByText('Product Added To Cart')).toBeVisible();
     });
@@ -123,7 +124,7 @@ test.describe('Add to Cart Tests', () => {
         await page.goto(ROUTES.DASHBOARD);
 
         // Trigger Add to Cart API from UI
-        await dashboardPage.addProductToCart('ZARA COAT 3');
+        await dashboardPage.addProductToCart(products.zaraCoat);
 
         // Verify modified API response on UI
         await expect(page.getByText('Modified Product Added To Cart')).toBeVisible();
